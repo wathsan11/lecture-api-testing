@@ -65,6 +65,33 @@ class JsonPlaceholderTest {
 
     @Test
     public void createPost() {
-        
+
+        var requestBody = """
+                {
+                    "title": "hello world"
+                }
+                """;
+
+        /* 1 */
+        /* 
+        var respose = given()
+            .header("Content-Type","application/json")
+            .body(requestBody)
+            .post("https://jsonplaceholder.typicode.com/posts")
+            .then()
+            .extract()
+            .response();
+
+        System.out.println(respose.body().asPrettyString());
+        */
+
+        given()
+            .header("Content-Type","application/json")
+            .body(requestBody)
+            .post("https://jsonplaceholder.typicode.com/posts")
+            .then()
+            .body("title", equalTo("hello world"));
+         
+
     }
 }
