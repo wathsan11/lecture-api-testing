@@ -5,16 +5,66 @@ package org.example;
 
 import org.junit.jupiter.api.Test;
 
+import io.restassured.RestAssured;
+
 import static io.restassured.RestAssured.*;
 import static org.junit.jupiter.api.Assertions.*;
+
+import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
+
 import static org.hamcrest.Matchers.*;
 
 class JsonPlaceholderTest {
     @Test
     public void getExistingPost() {
-    }
+
+        /*1 */
+        /*var responce = RestAssured.get("https://jsonplaceholder.typicode.com/posts/1 ");
+        System.out.println(responce.body().asPrettyString());
+        System.out.println(responce.statusCode());
+        assertEquals(200,responce.statusCode()) ;*/
+
+
+    /*2 */
+      /* 
+        var expectedTitle ="sunt aut facere repellat provident occaecati excepturi optio reprehenderit";
+
+        var response = RestAssured
+            .get("https://jsonplaceholder.typicode.com/posts/1 ")
+            .then()
+            .statusCode(200)
+            .extract()
+            .response();
+
+        System.out.println(response.body().asPrettyString());
+        assertTrue(response.body().asPrettyString().contains(expectedTitle));
+        */
+
+
+        /* 3 */
+        /* 
+        var expectedTitle ="sunt aut facere repellat provident occaecati excepturi optio reprehenderit";
+
+        RestAssured
+            .get("https://jsonplaceholder.typicode.com/posts/1")
+            .then()
+            .statusCode(200)
+            .body("title", Matchers.equalTo(expectedTitle));
+        */
+
+        /* 4 */
+        var expectedTitle ="sunt aut facere repellat provident occaecati excepturi optio reprehenderit";
+        get("https://jsonplaceholder.typicode.com/posts/1")
+            .then()
+            .statusCode(200)
+            .body("title",equalTo(expectedTitle));
+            
+
+    }  
 
     @Test
     public void createPost() {
+        
     }
 }
